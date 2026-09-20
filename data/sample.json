@@ -1,0 +1,9 @@
+{
+  "event_id": "sample-011",
+  "event_type": "EXPOSURE_REPORTED",
+  "aggregate_type": "exposure_case",
+  "aggregate_id": "aggregate-011",
+  "occurred_at": "2026-09-20T12:00:00+08:00",
+  "version": 1,
+  "summary": "隐翅虫暴露分级随访领域样例"
+}
