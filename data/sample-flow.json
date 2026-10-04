@@ -1,0 +1,108 @@
+[
+  {
+    "event_id": "evt-2026-0001",
+    "event_type": "EXPOSURE_REPORTED",
+    "aggregate_type": "exposure_case",
+    "aggregate_id": "case-2026-0001",
+    "occurred_at": "2026-10-02T21:14:00+08:00",
+    "version": 1,
+    "summary": "家长来电：6岁儿童雨后疑似拍打隐翅虫，面部出现红斑",
+    "caller_relation": "parent",
+    "patient_age_group": "child",
+    "exposure_site": { "region_code": "610113", "detail": "雁塔区某小区绿化带" },
+    "contact_manner": "slapped_on_skin"
+  },
+  {
+    "event_id": "evt-2026-0002",
+    "event_type": "SELF_CARE_RECORDED",
+    "aggregate_type": "exposure_case",
+    "aggregate_id": "case-2026-0001",
+    "occurred_at": "2026-10-02T21:16:00+08:00",
+    "version": 2,
+    "summary": "家长已给患处涂牙膏，记录为已发生事实并提示避免二次刺激",
+    "measure": "toothpaste_applied"
+  },
+  {
+    "event_id": "evt-2026-0003",
+    "event_type": "SYMPTOM_UPDATED",
+    "aggregate_type": "symptom_observation",
+    "aggregate_id": "obs-2026-0001",
+    "occurred_at": "2026-10-03T08:40:00+08:00",
+    "version": 1,
+    "summary": "面部红斑扩大并出现水疱伴渗出",
+    "symptom": "vesicles_with_exudate",
+    "site": "face",
+    "spreading": "rapid",
+    "exposure_case_id": "case-2026-0001"
+  },
+  {
+    "event_id": "evt-2026-0004",
+    "event_type": "CASE_ESCALATED",
+    "aggregate_type": "triage_assessment",
+    "aggregate_id": "triage-2026-0001",
+    "occurred_at": "2026-10-03T08:41:00+08:00",
+    "version": 1,
+    "summary": "面部敏感部位且为儿童，转入人工复核",
+    "escalation_reason": "sensitive_site",
+    "exposure_case_id": "case-2026-0001"
+  },
+  {
+    "event_id": "evt-2026-0005",
+    "event_type": "GUIDANCE_ISSUED",
+    "aggregate_type": "triage_assessment",
+    "aggregate_id": "triage-2026-0001",
+    "occurred_at": "2026-10-03T08:52:00+08:00",
+    "version": 2,
+    "summary": "人工复核后给出高风险提示：24小时内至皮肤科就诊，勿继续涂抹牙膏",
+    "risk_level": "high",
+    "rule_version": "paederus-guidance-2026.09",
+    "next_step": "dermatology_visit_within_24h",
+    "exposure_case_id": "case-2026-0001"
+  },
+  {
+    "event_id": "evt-2026-0006",
+    "event_type": "CONSULTATION_LINKED",
+    "aggregate_type": "consultation",
+    "aggregate_id": "cons-2026-0007",
+    "occurred_at": "2026-10-03T19:05:00+08:00",
+    "version": 1,
+    "summary": "家长再次来电询问处置，关联同一暴露并保留热线来源",
+    "exposure_case_id": "case-2026-0001",
+    "source_channel": "hotline"
+  },
+  {
+    "event_id": "evt-2026-0007",
+    "event_type": "CARE_OUTCOME_RECORDED",
+    "aggregate_type": "care_feedback",
+    "aggregate_id": "care-2026-0001",
+    "occurred_at": "2026-10-04T10:30:00+08:00",
+    "version": 1,
+    "summary": "社区卫生服务中心回传：已门诊接诊并对症处理",
+    "exposure_case_id": "case-2026-0001",
+    "outcome": "received_outpatient",
+    "facility_type": "community_health_center"
+  },
+  {
+    "event_id": "evt-2026-0008",
+    "event_type": "FOLLOWUP_CLOSED",
+    "aggregate_type": "followup_episode",
+    "aggregate_id": "fu-2026-0001",
+    "occurred_at": "2026-10-04T17:20:00+08:00",
+    "version": 1,
+    "summary": "随访节点完成，皮损结痂好转，关闭随访",
+    "closure_reason": "recovered",
+    "exposure_case_id": "case-2026-0001"
+  },
+  {
+    "event_id": "evt-2026-0009",
+    "event_type": "CLUSTER_SIGNAL_PUBLISHED",
+    "aggregate_type": "cluster_signal",
+    "aggregate_id": "cluster-610113-2026w40",
+    "occurred_at": "2026-10-04T18:00:00+08:00",
+    "version": 1,
+    "summary": "雁塔区近7日疑似隐翅虫暴露咨询聚集信号（去标识）",
+    "region_code": "610113",
+    "window": "2026-W40",
+    "case_count": 12
+  }
+]

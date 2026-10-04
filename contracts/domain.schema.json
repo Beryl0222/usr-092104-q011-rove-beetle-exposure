@@ -20,19 +20,26 @@
       "type": "string",
       "enum": [
         "EXPOSURE_REPORTED",
+        "CONSULTATION_LINKED",
+        "SELF_CARE_RECORDED",
         "SYMPTOM_UPDATED",
         "GUIDANCE_ISSUED",
         "CASE_ESCALATED",
-        "FOLLOWUP_CLOSED"
+        "CARE_OUTCOME_RECORDED",
+        "FOLLOWUP_CLOSED",
+        "CLUSTER_SIGNAL_PUBLISHED"
       ]
     },
     "aggregate_type": {
       "type": "string",
       "enum": [
         "exposure_case",
+        "consultation",
         "symptom_observation",
         "triage_assessment",
-        "followup_episode"
+        "care_feedback",
+        "followup_episode",
+        "cluster_signal"
       ]
     },
     "aggregate_id": {
@@ -50,7 +57,151 @@
     "summary": {
       "type": "string",
       "minLength": 1
+    },
+    "exposure_case_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_channel": {
+      "type": "string",
+      "minLength": 1
+    },
+    "measure": {
+      "type": "string",
+      "minLength": 1
+    },
+    "symptom": {
+      "type": "string",
+      "minLength": 1
+    },
+    "risk_level": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ]
+    },
+    "rule_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "escalation_reason": {
+      "type": "string",
+      "enum": [
+        "info_insufficient",
+        "rapid_spread",
+        "sensitive_site",
+        "child_high_risk"
+      ]
+    },
+    "outcome": {
+      "type": "string",
+      "minLength": 1
+    },
+    "closure_reason": {
+      "type": "string",
+      "minLength": 1
+    },
+    "region_code": {
+      "type": "string",
+      "minLength": 1
+    },
+    "case_count": {
+      "type": "integer",
+      "minimum": 1
     }
   },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "event_type": { "const": "EXPOSURE_REPORTED" } },
+        "required": ["event_type"]
+      },
+      "then": {
+        "properties": { "aggregate_type": { "const": "exposure_case" } }
+      }
+    },
+    {
+      "if": {
+        "properties": { "event_type": { "const": "CONSULTATION_LINKED" } },
+        "required": ["event_type"]
+      },
+      "then": {
+        "properties": { "aggregate_type": { "const": "consultation" } },
+        "required": ["exposure_case_id", "source_channel"]
+      }
+    },
+    {
+      "if": {
+        "properties": { "event_type": { "const": "SELF_CARE_RECORDED" } },
+        "required": ["event_type"]
+      },
+      "then": {
+        "properties": { "aggregate_type": { "const": "exposure_case" } },
+        "required": ["measure"]
+      }
+    },
+    {
+      "if": {
+        "properties": { "event_type": { "const": "SYMPTOM_UPDATED" } },
+        "required": ["event_type"]
+      },
+      "then": {
+        "properties": { "aggregate_type": { "const": "symptom_observation" } },
+        "required": ["symptom"]
+      }
+    },
+    {
+      "if": {
+        "properties": { "event_type": { "const": "GUIDANCE_ISSUED" } },
+        "required": ["event_type"]
+      },
+      "then": {
+        "properties": { "aggregate_type": { "const": "triage_assessment" } },
+        "required": ["risk_level", "rule_version"]
+      }
+    },
+    {
+      "if": {
+        "properties": { "event_type": { "const": "CASE_ESCALATED" } },
+        "required": ["event_type"]
+      },
+      "then": {
+        "properties": { "aggregate_type": { "const": "triage_assessment" } },
+        "required": ["escalation_reason"]
+      }
+    },
+    {
+      "if": {
+        "properties": { "event_type": { "const": "CARE_OUTCOME_RECORDED" } },
+        "required": ["event_type"]
+      },
+      "then": {
+        "properties": { "aggregate_type": { "const": "care_feedback" } },
+        "required": ["exposure_case_id", "outcome"]
+      }
+    },
+    {
+      "if": {
+        "properties": { "event_type": { "const": "FOLLOWUP_CLOSED" } },
+        "required": ["event_type"]
+      },
+      "then": {
+        "properties": { "aggregate_type": { "const": "followup_episode" } },
+        "required": ["closure_reason"]
+      }
+    },
+    {
+      "if": {
+        "properties": { "event_type": { "const": "CLUSTER_SIGNAL_PUBLISHED" } },
+        "required": ["event_type"]
+      },
+      "then": {
+        "properties": { "aggregate_type": { "const": "cluster_signal" } },
+        "required": ["region_code", "case_count"]
+      }
+    }
+  ],
   "additionalProperties": true
 }
