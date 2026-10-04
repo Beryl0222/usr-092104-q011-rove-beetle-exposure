@@ -23,7 +23,11 @@
         "SYMPTOM_UPDATED",
         "GUIDANCE_ISSUED",
         "CASE_ESCALATED",
-        "FOLLOWUP_CLOSED"
+        "FOLLOWUP_CLOSED",
+        "CALL_LINKED",
+        "FACILITY_OUTCOME_RECORDED",
+        "REVIEW_RESOLVED",
+        "CLUSTER_REPORTED"
       ]
     },
     "aggregate_type": {
@@ -32,7 +36,8 @@
         "exposure_case",
         "symptom_observation",
         "triage_assessment",
-        "followup_episode"
+        "followup_episode",
+        "cluster_report"
       ]
     },
     "aggregate_id": {
@@ -50,6 +55,10 @@
     "summary": {
       "type": "string",
       "minLength": 1
+    },
+    "payload": {
+      "type": "object",
+      "description": "事件负载，结构随 event_type 而定；基础信封字段保持稳定，扩展只发生在 payload 内"
     }
   },
   "additionalProperties": true
